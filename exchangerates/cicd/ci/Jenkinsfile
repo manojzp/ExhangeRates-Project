@@ -41,6 +41,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    sh 'chmod +x exchangerates/gradlew'
                     sh './exchangerates/gradlew build -x test -x runSmokeTest'
                 }
             }
@@ -49,6 +50,7 @@ pipeline {
         stage('Unit Test') {
             steps {
                 script {
+                    sh 'chmod +x exchangerates/gradlew'
                     sh './exchangerates/gradlew test'
                 }
             }
@@ -57,6 +59,7 @@ pipeline {
         stage('Smoke Test') {
             steps {
                 script {
+                    sh 'chmod +x exchangerates/gradlew'
                     sh './exchangerates/gradlew runSmokeTest'
                 }
             }
@@ -66,6 +69,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
+                        sh 'chmod +x exchangerates/gradlew'
                         sh './exchangerates/gradlew sonar -Dsonar.login=$SONAR_AUTH_TOKEN'
                     }
 
