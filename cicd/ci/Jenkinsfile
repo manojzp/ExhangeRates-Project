@@ -41,8 +41,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'chmod +x exchangerates/gradlew'
-                    sh './exchangerates/gradlew build -x test -x runSmokeTest'
+                    sh 'chmod +x gradlew'
+                    sh './gradlew build -x test -x runSmokeTest'
                 }
             }
         }
@@ -50,8 +50,8 @@ pipeline {
         stage('Unit Test') {
             steps {
                 script {
-                    sh 'chmod +x exchangerates/gradlew'
-                    sh './exchangerates/gradlew test'
+                    sh 'chmod +x gradlew'
+                    sh './gradlew test'
                 }
             }
         }
@@ -59,8 +59,8 @@ pipeline {
         stage('Smoke Test') {
             steps {
                 script {
-                    sh 'chmod +x exchangerates/gradlew'
-                    sh './exchangerates/gradlew runSmokeTest'
+                    sh 'chmod +x gradlew'
+                    sh './gradlew runSmokeTest'
                 }
             }
         }
@@ -69,8 +69,8 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
-                        sh 'chmod +x exchangerates/gradlew'
-                        sh './exchangerates/gradlew sonar -Dsonar.login=$SONAR_AUTH_TOKEN'
+                        sh 'chmod +x gradlew'
+                        sh './gradlew sonar -Dsonar.login=$SONAR_AUTH_TOKEN'
                     }
 
                     def qualityGate = waitForQualityGate()
