@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'gradle:8.10-jdk17'   // Linux image with Gradle + JDK
+            args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket for builds
+        }
+    }
 
     environment {
         GITHUB_CREDENTIALS_ID = 'github-token'
