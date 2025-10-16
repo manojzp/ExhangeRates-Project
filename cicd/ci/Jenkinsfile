@@ -94,7 +94,16 @@ pipeline {
                 }
             }
         }
-
+        stage('Install Docker CLI') {
+            steps {
+                sh '''
+                    echo "Installing Docker CLI inside Gradle container..."
+                    apt-get update -y
+                    apt-get install -y docker.io
+                    docker --version
+                '''
+            }
+        }
         stage('Build and Push docker image') {
             steps {
                 script {
