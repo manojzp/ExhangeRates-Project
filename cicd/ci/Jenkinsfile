@@ -69,16 +69,20 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
-                        sh 'echo "Testing connectivity to $SONAR_HOST_URL"'
-                        sh 'curl -I $SONAR_HOST_URL || true'
+                        // Verify Sonar variables exist
+                sh '''
+                    echo "Testing connectivity to $SONAR_HOST_URL"
+                    curl -I $SONAR_HOST_URL || true
+                '''
 
-                        sh 'chmod +x gradlew'
-                        sh '''
-                        echo "SonarQube host: $SONAR_HOST_URL"
-                        bash -c "./gradlew sonar \
+                // Run the analysis
+                sh '''
+                    echo "SonarQube host: $SONAR_HOST_URL"
+                    chmod +x gradlew
+                    ./gradlew sonar \
                         -Dsonar.host.url=$SONAR_HOST_URL \
-                        -Dsonar.login=$SONAR_AUTH_TOKEN"
-                        '''
+                        -Dsonar.login=$SONAR_AUTH_TOKEN
+                '''
                     }
 
                     def qualityGate = waitForQualityGate()
