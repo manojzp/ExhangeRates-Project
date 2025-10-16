@@ -70,7 +70,11 @@ pipeline {
                 script {
                     withSonarQubeEnv('SonarQube') {
                         sh 'chmod +x gradlew'
-                        sh "./gradlew sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_AUTH_TOKEN"
+                        sh '''
+                    ./gradlew sonar \
+                    -Dsonar.host.url=$SONAR_HOST_URL \
+                    -Dsonar.login=$SONAR_AUTH_TOKEN
+                '''
                     }
 
                     def qualityGate = waitForQualityGate()
