@@ -69,6 +69,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
+                        sh 'echo $SONAR_HOST_URL'
                         sh 'chmod +x gradlew'
                         sh './gradlew sonar -Dsonar.login=$SONAR_AUTH_TOKEN'
                     }
