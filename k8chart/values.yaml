@@ -8,7 +8,7 @@ image:
   repository: manojdocker0070055/exchangerateproject
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 52a5c46
+  tag: 1007886
 
 imagePullSecrets:
   - name: dockerhub-secret
