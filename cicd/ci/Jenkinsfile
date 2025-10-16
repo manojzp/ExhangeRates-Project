@@ -199,8 +199,8 @@ pipeline {
                         gitUsernamePassword(credentialsId: GITHUB_CREDENTIALS_ID, gitToolName: 'Default')
                     ]) {
                         sh """
-                             git config user.email "kodedge-bot-ci@kodedge.com"
-                             git config user.name "kodedge-bot-ci"
+                             git config user.email "manojkumar7.devops@gmail.com"
+                             git config user.name "Manoj"
                              git add k8chart/values.yaml
                              git commit -m "Update image tag to version ${imageTag}"
                              git push origin main
